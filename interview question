@@ -1,0 +1,49 @@
+1. What is Wireshark Used For?
+Wireshark is a network protocol analyzer, often called a sniffer. Think of it as a specialized microscope for your network traffic.
+Its primary uses are:
+* Troubleshooting: Diagnosing why a network connection is slow, failing, or behaving unexpectedly.
+* Security Analysis: Investigating suspicious activity or checking for unencrypted data transmissions.
+* Protocol Development & Learning: Seeing how different network protocols (like HTTP or DNS) work in real-time.
+* Performance Analysis: Identifying bottlenecks by measuring time delays between requests and responses.
+
+2. What is a Packet?
+A packet is the fundamental unit of data transfer in a network.
+Imagine sending a large book; a packet is like a small, addressed envelope. It contains a chunk of the original data, along with header information (like the source and destination addresses, and sequencing numbers) that allows the data to be routed and reassembled at the destination.
+
+3. How to Filter Packets in Wireshark?
+You use filters to cut through the noise of captured traffic. There are two main types:
+1. Capture Filters: Used before you start capturing. They tell Wireshark which packets to save to the file.
+* Example: port 80 (Capture only traffic going to or from port 80).
+2. Display Filters: Used after you've captured the data. They simply hide packets you don't want to see from the current view. This is the most common method.
+* Examples: ip.addr == 192.168.1.1, http, or tcp.port == 443 and http.
+
+4. What is the Difference Between TCP and UDP?
+TCP (Transmission Control Protocol) and UDP (User Datagram Protocol) are the two most common transport protocols, differing primarily in reliability and speed.
+TCP (Transmission Control Protocol):
+* Reliability: High. It's Connection-Oriented, ensuring all data arrives in order and re-sends anything lost. It's like a phone call where you wait for confirmation.
+* Speed: Slower due to the overhead of establishing the connection and confirming delivery.
+* Use Cases: Web browsing (HTTP/HTTPS), Email, File Transfer.
+UDP (User Datagram Protocol):
+* Reliability: Low. It's Connectionless. It sends the data and doesn't care if it arrives or not. It's like sending a postcard.
+* Speed: Faster because it has minimal overhead.
+* Use Cases: Video/Voice streaming (VoIP), Gaming, DNS lookups.
+
+5. What is a DNS Query Packet?
+A DNS (Domain Name System) Query Packet is a request sent from your computer to a DNS server. Its purpose is to resolve a domain name into an IP address.
+When you type a name like google.com, your computer sends a DNS query packet asking, "What is the IP address for https://www.google.com/url?sa=E&source=gmail&q=google.com?" The server replies with the address, allowing the connection to be established.
+
+6. How Can Packet Capture Help in Troubleshooting?
+Packet capture with Wireshark provides proof of what actually happened on the network.
+* Network vs. Application: If the request leaves your computer but no response returns, the issue is on the server side or in the path.
+* Spotting Errors: Seeing many TCP Retransmission packets indicates packets are being lost due to congestion or a poor connection.
+* Latency Analysis: You can measure the time delay between a request and an answer to pinpoint exactly where the slowdown is occurring.
+
+7. What is a Protocol?
+A protocol is simply a set of rules that computers must follow to communicate with each other.
+Protocols define the format of the data packet, the timing for sending data, and the error handling procedures. Examples include HTTP, IP, and TCP/UDP.
+
+8. Can Wireshark Decrypt Encrypted Traffic?
+No, not by default. If traffic is correctly encrypted using TLS/SSL (like HTTPS), Wireshark can only see the encrypted data.
+However, decryption is possible if you provide Wireshark with the necessary security information:
+* The Private Key: If you own the server, you can give Wireshark the server's private key to decrypt the session.
+* Pre-Shared Keys: For certain Wi-Fi traffic, you can provide the network's password to decrypt the frames.
